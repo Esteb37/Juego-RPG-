@@ -1,11 +1,18 @@
+//Proyecto de Programación Orientada a objetos
+//Autor: Esteban Padilla Cerdio
+//Fecha de creación: 12/11/2020
+//Última modificación: 19/11/2020
+//Archivo: main.cpp
+
+
 #include <iostream>
 #include <time.h>
 using namespace std;
+#include "Entidad.h"
+#include "Objeto.h"
+#include "Inventario.h"
 #include "Heroe.h"
 #include "Enemigo.h"
-#include "Objeto.h"
-
-
 
 Heroe heroe;
 

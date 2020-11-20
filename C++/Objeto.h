@@ -1,3 +1,9 @@
+//Proyecto de Programación Orientada a objetos
+//Autor: Esteban Padilla Cerdio
+//Fecha de creación: 12/11/2020
+//Última modificación: 19/11/2020
+//Archivo: Objeto.h
+
 #pragma once
 #include <iostream>
 using namespace std;
@@ -9,21 +15,20 @@ class Objeto{
     public:
 
         Objeto(){
-          x = rand()%50;
-          y = rand()%50;
+          setPosicion(rand()%50,rand()%50);
           int t = rand()%3;
           switch(t){
             case 0:
-              tipo = "Poción de Vida";
-              efecto = 5;
+              setTipo("Poción de Vida");
+              setEfecto(5);
               break;
             case 1:
-              tipo = "Botas de Velocidad";
-              efecto = 2;
+              setTipo("Botas de Velocidad");
+              setEfecto(2);
               break;
             case 2:
-              tipo = "Armadura de Malla";
-              efecto = 3;
+              setTipo("Armadura de Malla");
+              setEfecto(3);
               break;
           }
         ;};
@@ -39,7 +44,10 @@ class Objeto{
 
     private:
 
-
+        void setTipo(string t){tipo = t;}; //Establecer tipo
+        void setIndice(int i){indice = i;}; //Establecer índice
+        void setPosicion(int x_,int y_){x=x_;y=y_;}; //Establecer posición
+        void setEfecto(int e){efecto = e;}; //Establecer efecto
         int indice; //Índice en lista de inventario
         float x,y; //Posición
         float efecto; //Tamaño de efecto a aplicar
