@@ -1,7 +1,7 @@
 //Proyecto de Programación Orientada a objetos
 //Autor: Esteban Padilla Cerdio
 //Fecha de creación: 12/11/2020
-//Última modificación: 19/11/2020
+//Última modificación: 26/11/2020
 //Archivo: Enemigo.h
 
 #pragma once
