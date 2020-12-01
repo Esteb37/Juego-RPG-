@@ -1,34 +1,24 @@
 //Proyecto de Programación Orientada a objetos
 //Autor: Esteban Padilla Cerdio
 //Fecha de creación: 12/11/2020
-//Última modificación: 26/11/2020
+//Última modificación: 30/11/2020
 //Archivo: Heroe.h
 
 #pragma once
 #include <iostream>
-
+#include "Entidad.h"
+#include "Inventario.h"
 using namespace std;
 
 class Enemigo;
 class Objeto;
 class Inventario;
 
+
 class Heroe:public Entidad{
 
     public:
-        Heroe(){
-          cout<<"Nombre: ";
-          string n;
-          cin>>n;
-          setNombre(n);
-          setVida(45);
-          setFuerza(5);
-          setVidas(3);
-          setRango(5);
-          setVelocidad(5);
-          setPosicion(45,45);
-
-        ;};
+        Heroe();
         void Defender(); //Aumentar defensas
         void Buscar(); //Buscar enemigos en el mapa
 
@@ -36,8 +26,15 @@ class Heroe:public Entidad{
         void Analizar(Enemigo enemigo); //Obtener atributos del enemigo
 
         string getNombre(){return nombre;}; //Obtener nombre
-        void agregarObjeto(Objeto *objeto); //Añadir objeto a inventario
-
+    
+        void Mover(); //Mover al jugador
+        void Lastimar(int dano); //Inflingirse daño
+        void Recoger(Objeto *objeto); //Agrega objeto al inventario 
+        void Usar(int i); //Aplicar efectos sobre el héroe
+        void verInventario(); //Ver objetos en el intercambio
+        
+        bool continuarJuego(){return continuar;}; //Saber si se cintinúa el juego o si se termina
+        
     private:
 
       void setVidas(int v){vidas = v;}; //Establecer número de vidas
@@ -46,4 +43,6 @@ class Heroe:public Entidad{
       int vidas; //Número de vidas disponibles
       string nombre; //Nombre del jugador
       Inventario inventario; //Inventario de objetos
+      bool continuar; //Variable de control para indicar fin del juego
+      int kills;
 ;};

@@ -1,7 +1,7 @@
 //Proyecto de Programación Orientada a objetos
 //Autor: Esteban Padilla Cerdio
 //Fecha de creación: 19/11/2020
-//Última modificación: 26/11/2020
+//Última modificación: 30/11/2020
 //Archivo: Entidad.h
 
 #pragma once
@@ -20,6 +20,7 @@ class Entidad{
         int getVelocidad(){return velocidad;}; //Obtener velocidad
 
         void Lastimar(int dano); //Inflingirse daño
+        
         void Mover(int x_, int y_); //Mover a través del mapa
 
     protected:
