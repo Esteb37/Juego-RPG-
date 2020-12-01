@@ -11,6 +11,16 @@ El siguiente proyecto utilizará la interfaz de texto de C++ para crear un video
 
 ---------------------------------------------------------
 
+Correciones:
+
+Se colocaron todos los getters y setters correctamente en todas las clases
+
+Se incluyó composición (entre el héroe y el inventario) y agregación (entre el inventario y los objetos) en las relaciones de clases
+
+El estilo cumple con las normas y estándares: listar normas y estándares
+
+---------------------------------------------------------
+
 Documentación:
 
 
