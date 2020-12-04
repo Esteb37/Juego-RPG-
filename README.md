@@ -11,6 +11,12 @@ El siguiente proyecto utilizará la interfaz de texto de C++ para crear un video
 
 ---------------------------------------------------------
 
+## Compilación:
+
+"g++ main.cpp enemigo.cpp enemigo.h heroe.cpp heroe.h entidad.h inventario.cpp inventario.h objeto.cpp objeto.h -o juego.exe"
+
+---------------------------------------------------------
+
 ## Correciones:
 
 #### 4/12/2020
