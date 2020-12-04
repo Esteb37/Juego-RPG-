@@ -7,7 +7,7 @@
 
 
 /*
-  Clase que representa los enemigos del jugador, dividiso en distintos
+  Clase que representa los enemigos del jugador, divididos en distintos
   tipos con características únicas
 */
 #pragma once
