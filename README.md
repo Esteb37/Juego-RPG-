@@ -1,5 +1,5 @@
-# Proyecto
-## Pensamiento Computacional para Ingeniería
+# Proyecto Final
+## Pensamiento Computacional Orientado a Objetos
 ### Esteban Padilla Cerdio
 #### A01703068
 
