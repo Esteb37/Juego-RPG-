@@ -13,11 +13,11 @@ El siguiente proyecto utilizará la interfaz de texto de C++ para crear un video
 
 ## Correciones:
 
-### 4/12/2020
+#### 4/12/2020
 
 Se agregaron los comentarios con el formato adecuado
 
-### 30/11/2020
+#### 30/11/2020
 Se colocaron todos los getters y setters correctamente en todas las clases
 
 Se incluyó composición (entre el héroe y el inventario) y agregación (entre el inventario y los objetos) en las relaciones de clases
