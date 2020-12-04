@@ -4,16 +4,25 @@
 //Última modificación: 30/11/2020
 //Archivo: Heroe.cpp
 
-
+/*
+  Clase para representar al personaje principal controlado por
+  el jugador y sus interacciones con el ambiente
+*/
 #include "Heroe.h"
 #include "Enemigo.h"
 
-//Constructor
+/*
+  Constructor que genera un personaje con características básicas
+  y posicionado al centro
+*/
 Heroe::Heroe(){
 
+    //Solicitarle al jugador un nombre
     cout<<"Nombre: ";
     string n;
     cin>>n;
+
+    //Asignar características básicas del jugador
     setNombre(n);
     setVida(45);
     setFuerza(5);
@@ -24,29 +33,48 @@ Heroe::Heroe(){
     continuar = true;
     kills = 0;
 }
-//Función para mover al jugador
+
+
+/*
+  Mueve al jugador en una dirección seleccionada según su velocidad
+  actual y si no ha colisionado con las esquinas del mapa
+  @param
+  @return
+*/
 void Heroe::Mover(){
     while(true){
+
+        //Solicitar la dirección hacia la que se desea mover
         cout<<"Ingresar dirección: (wasd):\n";
         char dir;
         cin>>dir;
         cin.ignore();
+
+        //Mover al jugador según la dirección seleccionada y su velocidad
+        //Si se encuentra una pared, impedir el movimiento
         switch(dir){
 
+            //Subir
             case 'w':
-                if(y-velocidad>=0) y-=velocidad; //Subir 
+                if(y-velocidad>=0) y-=velocidad;
                 else cout<<"Te has encontrado con una pared.\n";
                 break;
+
+             //Bajar
             case 's':
-                if(y+velocidad<=50) y+=velocidad; //Bajar
+                if(y+velocidad<=50) y+=velocidad;
                 else cout<<"Te has encontrado con una pared.\n";
                 break;
+
+            //Izquierda
             case 'a':
-                if(x-velocidad>=0) x-=velocidad; //Izquierda
+                if(x-velocidad>=0) x-=velocidad;
                 else cout<<"Te has encontrado con una pared.\n";
                 break;
+
+            //derecha
             case 'd':
-                if(x+velocidad<=50) x+=velocidad; //derecha
+                if(x+velocidad<=50) x+=velocidad;
                 else cout<<"Te has encontrado con una pared.\n";
                 break;
             default:
@@ -58,29 +86,57 @@ void Heroe::Mover(){
     }
 }
 
-//Función para atacar a un enemigo
+
+/*
+  Inflinge daño a un enemigo seleccionado según la fuerza del jugador
+  y el rango de ataque
+  @param enemigo - El objeto del enemigo a atacar
+  @return
+*/
 void Heroe::Atacar(Enemigo *enemigo){
 
-    if(abs(enemigo->getX()-x)<=rango&&abs(enemigo->getY()-y)<=rango){ //Si el enemigo se encuentra dentro del rango de ataque
-        cout<<"Vida de Enemigo #"<<enemigo->getIndice()+1<<": "<<enemigo->getVida()<<endl; //Vida actual del enemigo
-        enemigo->Lastimar(fuerza); //Inflingir daño al enemigo
+    //Si el enemigo se encuentra dentro del rango de ataque
+    if(abs(enemigo->getX()-x)<=rango&&abs(enemigo->getY()-y)<=rango){
+
+        //Desplegar la vida actual del enemigo
+        cout<<"Vida de Enemigo #"<<enemigo->getIndice()+1<<": "<<enemigo->getVida()<<endl;
+
+        //Inflingir daño al enemigo
+        enemigo->Lastimar(fuerza);
         cout<<"¡Has atacado!"<<endl;
+
+        //Si la vida dek enemigo se elinina por completo, eliminar de la
+        //lista de enemigos vivos y aumentar el puntaje del jugador
         if(enemigo->getVida()<=0){
             cout<<"Lo has asesinado, buen trabajo.\n";
-            enemigo->Morir(); //Eliminar al enemigo de la lista de enemigos vivos
+            enemigo->Morir();
             kills+=1;
+
+            //Si el jugador obtiene diez puntos, terminar el juego
             if(kills>=10) continuar = false;
         }
-        else cout<<"Vida de Enemigo #"<<enemigo->getIndice()+1<<": "<<enemigo->getVida()<<endl; //Vida final del enemigo
-        
+
+        //Desplegar la vida del enemigo después del ataque, si no se ha muerto
+        else cout<<"Vida de Enemigo #"<<enemigo->getIndice()+1<<": "<<enemigo->getVida()<<endl;
+
     }
+
     else cout<<"Ese enemigo está demasiado lejos.\n";
 }
 
-//Función para analizar características de un enemigo
+
+/*
+  Obtiene y despliega los atributos básicos del enemigo seleccionado
+  si está en un rango de visibilidad
+  @param enemigo - El objeto del enemigo a Analizar
+  @return
+*/
 void Heroe::Analizar(Enemigo enemigo){
 
-    if(abs(enemigo.getX()-x)<=10&&abs(enemigo.getY()-y)<=10){ //Si el enemigo se encuentra dentro del rango de búsqueda
+    //Si el enemigo se encuentra dentro del rango de búsqueda
+    if(abs(enemigo.getX()-x)<=10&&abs(enemigo.getY()-y)<=10){
+
+        //Desplegar la información básica del enemigo
         cout<<"Enemigo #"<<enemigo.getIndice()+1<<":"<<endl;
         cout<<"Tipo: "<<enemigo.getTipo()<<endl;
         cout<<"Posición: "<<enemigo.getX()<<","<<enemigo.getY()<<endl;
@@ -90,41 +146,51 @@ void Heroe::Analizar(Enemigo enemigo){
     else cout<<"Ese enemigo está demasiado lejos.\n";
 }
 
-//Función para causar daño al enemigo
+
+/*
+  Inflinge daño al jugador, restando los puntos correspondientes
+  de su puntaje de vida
+  @param dano - La cantidad de daño a Inflingir
+  @return
+*/
 void Heroe::Lastimar(int dano){
 
     vida-=dano;
-    
-    if(vida<=0){ //Si se pierde toda la salud, quitar una vida
+
+    //Si se pierde toda la salud, quitar una vida
+    if(vida<=0){
         vidas--;
         cout<<"Tu salud ha caído demasiado, has perdido una vida. Te quedan "<<vidas<<"vidas.";
         vida = 40;
     }
 
-    if(vidas==0){ //Si se pierden todas las vidas, terminar juego
+    //Si se pierden todas las vidas, terminar juego
+    if(vidas==0){
         cout<<"GAME OVER"<<endl;
         continuar = false;
     }
-
-
 }
 
 
-//Función para ver inventario
-void Heroe::verInventario(){
- 
-    inventario.Abrir(); //Abrir inventario y ver objetos
-    
-}
-
-
-//Función para recoger objeto
+/*
+  Recoge un objeto del mapa y lo coloca en el inventario para ser
+  utilizado si se encuentra dentro del rango del jugador
+  @param objeto - El objeto para añadir al Inventario
+  @return
+*/
 void Heroe::Recoger(Objeto *objeto){
-    if(objeto->getEstado()=="suelto"){ //Si el objeto no se ha recogido
-        if(abs(objeto->getX()-x)<=5&&abs(objeto->getY()-y)<=5){ //Si el objeto está dentro del rango de alcance
-            if(inventario.getTamano()<=inventario.getCapacidad()) //Si el inventario no está lleno
+
+    //Si el objeto no se ha recogido
+    if(objeto->getEstado()=="suelto"){
+
+        //Si el objeto está dentro del rango de alcance
+        if(abs(objeto->getX()-x)<=5&&abs(objeto->getY()-y)<=5){
+
+            //Si el inventario no está lleno
+            if(inventario.getTamano()<=inventario.getCapacidad())
             {
-                inventario.agregarObjeto(objeto); //Agregar objeto a inventario
+                 //Agregar objeto a inventario
+                inventario.agregarObjeto(objeto);
                 cout<<"Has recogido un/a "<<objeto->getNombre()<<"\n";
             }
             else cout<<"Tu inventario está lleno\n";
@@ -135,12 +201,23 @@ void Heroe::Recoger(Objeto *objeto){
 }
 
 
-//Función para usar objeto
+/*
+  Utiliza un objeto del inventario para aplicar sus efectos según
+  su tipo sobre las características del jugador
+  @param i - EL índice del objeto dentro del inventario
+  @return
+*/
 void Heroe::Usar(int i){
-    Objeto *objeto = inventario.getObjetos()[i]; //Obtener el objeto del inventario
-    
-    if(objeto->getEstado()!="usado"){ //Si el objeto no ha sido utilizado
-       switch(objeto->getTipo()){ //Según el tipo de objeto realizar una acción diferente
+
+    //Obtener el objeto del inventario
+    Objeto *objeto = inventario.getObjetos()[i];
+
+    //Si el objeto no ha sido utilizado
+    if(objeto->getEstado()!="usado"){
+
+      //Según el tipo de objeto afectar una característica del jugador
+      //distinta, según la potencia del efecto
+       switch(objeto->getTipo()){
         case 0:
             vida+=objeto->getEfecto();
             cout<<"\nSe te ha otorgado "<<objeto->getEfecto()<<" de vida. Tu vida ahora es "<<vida<<"\n";
@@ -160,5 +237,21 @@ void Heroe::Usar(int i){
         }
     }
     else cout<<"Ese objeto ya ha sido utilizado\n";
-    inventario.eliminarObjeto(i); //Marcar objeto como usado
+
+    //Marcar objeto como usado
+    inventario.eliminarObjeto(i);
+}
+
+
+/*
+  Despliega la lista de objetos que se encuentran dentro del
+  inventario con sus índices para ser utilizados
+  @param
+  @return
+*/
+void Heroe::verInventario(){
+
+    //Abrir inventario y ver objetos
+    inventario.Abrir();
+
 }

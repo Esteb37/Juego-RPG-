@@ -4,14 +4,32 @@
 //Última modificación: 30/11/2020
 //Archivo: Objeto.cpp
 
+
+/*
+  Clase para representar los objetos que el jugador puede recoger
+  del suelo y utilizar para modificar sus estadísticas básicas
+  de juego
+*/
 #include "Objeto.h"
 #include "Heroe.h"
 
-//Constructor
+/*
+  Constructor que asigna un tipo de objeto de forma aleatoria,
+  lo coloca en una posición aleatoria en el y le asigna un índice
+  según su posición en la lista de objetos
+  @param i - El índice de posición
+*/
 Objeto::Objeto(int i){
-  setPosicion(rand()%50,rand()%50); //Colocar objeto en un lugar aleatorio
+  //Colocar objeto en un lugar aleatorio
+  setPosicion(rand()%50,rand()%50);
+
+  //Establecer índice en la lista de objetos del mapa
   setIndice(i);
+
+  //Establecer tipo de objeto
   setTipo(i);
+
+  //Establecer el tipod e objeto y su potencia según su índice
   switch(i){
     case 0:
       setNombre("Poción de Vida");
@@ -30,6 +48,7 @@ Objeto::Objeto(int i){
       setEfecto(5);
       break;
   }
+
+  //Establecer el objeto como suelto
   setEstado("suelto");
 };
-       
